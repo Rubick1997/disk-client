@@ -1,14 +1,17 @@
 import React, { useState } from "react";
-import { registration } from "../../actions/user";
+
 import Input from "../input/Input";
 import styles from "./styles.module.scss";
-
-const Registration = () => {
+import { useDispatch } from "react-redux";
+import { login } from "../../actions/user";
+const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const dispatch = useDispatch();
+
 	return (
-		<div className={styles.registration}>
-			<div className={styles.registrationHeader}> Registration</div>
+		<div className={styles.authorization}>
+			<div className={styles.authorizationHeader}> Login</div>
 			<Input
 				value={email}
 				setValue={setEmail}
@@ -21,16 +24,13 @@ const Registration = () => {
 				type='password'
 				placeholder='Type password...'
 			/>
-			<button
-				className={styles.registrationButton}
-				onClick={() => {
-					registration(email, password);
-				}}>
-				{" "}
+			<button className={styles.authorizationButton} onClick={() => {
+			  dispatch(login(email,password))
+			}}>
 				Sign In
 			</button>
 		</div>
 	);
 };
 
-export default Registration;
+export default Login;
